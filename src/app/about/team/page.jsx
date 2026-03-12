@@ -1,5 +1,10 @@
 import React from 'react';
 
+export const metadata = {
+  title: "Our Team",
+  description: "A food delivery app built with Next.js, showcasing a variety of delicious meals and a seamless shopping experience.",
+};
+
 const TeamPage = () => {
     const teamMembers = [
         {

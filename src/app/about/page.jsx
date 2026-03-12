@@ -1,6 +1,11 @@
 import Link from 'next/link';
 import React from 'react';
 
+export const metadata = {
+  title: "About Us",
+  description: "A food delivery app built with Next.js, showcasing a variety of delicious meals and a seamless shopping experience.",
+};
+
 const AboutPage = () => {
     return (
         <div className="max-w-4xl mx-auto space-y-12 py-10">

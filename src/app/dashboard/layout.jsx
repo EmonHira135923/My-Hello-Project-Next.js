@@ -2,6 +2,14 @@ import Anavvar from '@/Componets/Shared/Anavvar';
 import Aside from '@/Componets/Shared/Aside';
 import React from 'react';
 
+export const metadata = {
+  title: {
+    template: '%s | MY HELLO Dashboard',
+    default: 'Dashboard Overview',
+  },
+  description: "Monitor your food delivery business stats...",
+};
+
 const DashboardLayout = ({ children }) => {
     return (
         <div className="flex min-h-screen bg-gray-50">
