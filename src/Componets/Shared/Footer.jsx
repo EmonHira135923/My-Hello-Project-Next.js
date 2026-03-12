@@ -7,6 +7,7 @@ const Footer = () => {
   const pathName = usePathname();
 
   if(pathName.startsWith("/dashboard")) return <></>;
+  if(pathName.startsWith("/auth")) return <></>;
 
   return (
     <footer className="bg-slate-950 border-t border-slate-900 pt-16 pb-8">

@@ -7,6 +7,7 @@ const Header = () => {
   const pathName = usePathname();
 
   if(pathName.startsWith("/dashboard")) return <></>;
+  if(pathName.startsWith("/auth")) return <></>;
 
   return (
     <div>

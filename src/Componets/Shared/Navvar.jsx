@@ -5,7 +5,7 @@ import NavLink from "./NavLink";
 const Navvbar = () => {
   return (
     <div>
-      <nav className="flex items-center justify-between px-8 py-4 max-w-7xl mx-auto">
+      <nav className="flex items-center justify-between px-8 py-4 max-w-9xl mx-auto bg-gray-900">
         {/* LEFT: Logo Section */}
         <div className="flex-1">
           <Link
@@ -37,10 +37,10 @@ const Navvbar = () => {
 
         {/* RIGHT: Auth Buttons */}
         <div className="flex-1 flex justify-end items-center gap-5">
-          <NavLink href="/login">
+          <NavLink href="/auth/login">
             Login
           </NavLink>
-          <NavLink href="/register">
+          <NavLink href="/auth/register">
             Register
           </NavLink>
         </div>
