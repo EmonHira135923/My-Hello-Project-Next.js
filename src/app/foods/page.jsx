@@ -3,6 +3,24 @@ import CartItems from "@/Componets/Food/CartItems";
 import FoodSearch from "@/Componets/forms/FoodSearch";
 import React from "react";
 
+// --- SEO (Dynamic Metadata) ---
+export async function generateMetadata({ searchParams }) {
+  const params = await searchParams;
+  const query = params.search || "";
+
+  return {
+    title: query 
+      ? `Search results for ${query}` 
+      : "Available Foods | Taxi Kitchen - Fresh Meals Delivered",
+    description: query 
+      ? `Looking for ${query}? Check out our fresh and delicious ${query} options at Taxi Kitchen.`
+      : "Explore our wide variety of fresh meals delivered straight from our kitchen to yours. Order now!",
+    openGraph: {
+      images: ['/og-food-image.jpg'], // আপনার পাবলিক ফোল্ডারে একটি ইমেজ রাখতে পারেন
+    },
+  };
+}
+
 const fetchFoods = async (search) => {
   try {
     const res = await fetch(
@@ -17,8 +35,9 @@ const fetchFoods = async (search) => {
   }
 };
 
-const FoodPage = async ({searchParams}) => {
-  const {search = ""} = await searchParams;
+const FoodPage = async ({ searchParams }) => {
+  const params = await searchParams;
+  const search = params.search || "";
   const allfoods = await fetchFoods(search);
 
   return (
@@ -27,13 +46,15 @@ const FoodPage = async ({searchParams}) => {
       <header className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
           <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">
-            Available Foods{" "}
+             Available Foods
             <span className="text-blue-600 bg-blue-50 px-3 py-1 rounded-full text-lg ml-2 border border-blue-100">
               {allfoods.length}
             </span>
           </h1>
           <p className="text-gray-500 mt-2 text-base">
-            Fresh meals delivered from our kitchen to yours.
+            {search 
+              ? `Showing the best matches for your search.` 
+              : "Fresh meals delivered from our kitchen to yours."}
           </p>
         </div>
         <FoodSearch />
@@ -60,8 +81,6 @@ const FoodPage = async ({searchParams}) => {
               </span>
             </div>
             <hr className="border-gray-100 mb-6" />
-
-            {/* Cart Placeholder Content */}
             <CartItems />
           </div>
         </aside>
@@ -70,9 +89,9 @@ const FoodPage = async ({searchParams}) => {
       {/* Empty State */}
       {allfoods.length === 0 && (
         <div className="text-center py-32 bg-white rounded-3xl border-2 border-dashed border-gray-200 mt-10">
-          <p className="text-gray-400 text-lg">No foods found at the moment.</p>
+          <p className="text-gray-400 text-lg">No foods found for "{search}".</p>
           <button className="mt-4 text-blue-600 font-semibold hover:underline">
-            Try refreshing the page
+            Try searching for something else
           </button>
         </div>
       )}

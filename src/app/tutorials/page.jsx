@@ -1,5 +1,22 @@
 import React from 'react';
 
+export const metadata = {
+  title: "Tutorial Story",
+  description: "Read the inspiring journeys of our talented developers and learn how they built their careers in the tech industry.",
+  openGraph: {
+    title: "Developer Stories",
+    description: "Read the inspiring journeys of our talented developers and learn how they built their careers in the tech industry.",
+    images: [
+      {
+        url: '/reviews-banner.jpg', // আপনার পাবলিক ফোল্ডারে থাকা ইমেজের পাথ
+        width: 1200,
+        height: 630,
+        alt: 'Taxi Kitchen Customer Reviews',
+      },
+    ],
+  },
+};
+
 const TutorialsPage = () => {
     const tutorials = [
         { id: 1, title: 'Getting Started with Next.js', duration: '12:45', category: 'Basics', level: 'Beginner' },

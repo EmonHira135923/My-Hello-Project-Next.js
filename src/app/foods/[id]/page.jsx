@@ -12,6 +12,44 @@ const getSingleFood = async (id) => {
     }
 };
 
+// --- SEO (Dynamic Metadata) ---
+export async function generateMetadata({ params }) {
+    const { id } = await params;
+    const food = await getSingleFood(id);
+
+    if (!food) {
+        return {
+            title: "Food Not Found | Taxi Kitchen",
+        };
+    }
+
+    return {
+        title: `${food.title} - ${food.category} | Taxi Kitchen`,
+        description: `Enjoy the authentic taste of ${food.title} from ${food.area}. Order now for only ৳${food.price} and experience the best ${food.category} cuisine.`,
+        openGraph: {
+            title: `${food.title} | Taxi Kitchen`,
+            description: `Order ${food.title} at ৳${food.price}. Freshly prepared ${food.area} style ${food.category}.`,
+            url: `https://your-domain.com/foods/${id}`, // আপনার ডোমেইন অনুযায়ী পরিবর্তন করুন
+            siteName: 'Taxi Kitchen',
+            images: [
+                {
+                    url: food.foodImg,
+                    width: 800,
+                    height: 600,
+                    alt: food.title,
+                },
+            ],
+            type: 'website',
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: food.title,
+            description: food.description || `Best ${food.title} in town!`,
+            images: [food.foodImg],
+        },
+    };
+}
+
 const FoodsDetailsPage = async ({ params }) => {
     const { id } = await params;
     const food = await getSingleFood(id);
@@ -85,7 +123,7 @@ const FoodsDetailsPage = async ({ params }) => {
                                     <span className="text-gray-400 text-sm mr-4 uppercase font-bold tracking-widest">Qty</span>
                                     <input type="number" defaultValue={1} min={1} className="w-12 text-center font-bold outline-none" />
                                 </div>
-                                <FoodOrder/>
+                                <FoodOrder food={food}/>
                             </div>
                         </div>
                     </div>
