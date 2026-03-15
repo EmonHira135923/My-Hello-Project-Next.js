@@ -30,6 +30,9 @@ const Navvbar = () => {
           <NavLink href="/reviews">
             Reviews
           </NavLink>
+          <NavLink href="/feedbacks">
+            Feedback
+          </NavLink>
           <NavLink href="/about">
             About Us
           </NavLink>
